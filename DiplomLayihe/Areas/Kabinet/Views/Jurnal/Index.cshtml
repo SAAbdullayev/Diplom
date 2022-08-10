@@ -1,0 +1,62 @@
+﻿@{
+    var timeNow = DateTime.UtcNow.AddHours(4);
+}
+
+<div class="content">
+    <table class="table table-hover cedvel">
+        <thead>
+            <tr>
+                <th scope="col">Bitme Vaxti</th>
+                <th scope="col">Fenn</th>
+                <th scope="col">Qrup</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Lessons)
+            {
+                if (item.BitmeVaxti < timeNow)
+                {
+            <tr>
+                <td>@item.BitmeVaxti.ToString("MMM d, yyyy - HH:mm")</td>
+                <td>
+                    @if (User.IsInRole("Telebe"))
+                    {
+                        foreach (var fenn in ViewBag.Fenn)
+                        {
+                            if (item.FennId == fenn.Id)
+                            {
+                                @fenn.Name
+                            }
+                        }
+                    }
+                    else if (User.IsInRole("Muellim"))
+                    {
+                        @ViewBag.Fenn.Name
+                    }
+                </td>
+                <td>
+                    @if (User.IsInRole("Telebe"))
+                    {
+                        @ViewBag.Groups.Name
+                    }
+                    else if (User.IsInRole("Muellim"))
+                    {
+                        @foreach (var qrup in ViewBag.Groups)
+                        {
+                            @if (qrup.Id == item.GroupId)
+                            {
+                            <td>@qrup.Name</td>
+                        }
+                        }
+                    }
+                    </td>
+                    <td>
+                        <a asp-route-id="@item.Id" asp-action="jurnaletraflibaxish" class="btn btn-primary">Baxish</a>
+                    </td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

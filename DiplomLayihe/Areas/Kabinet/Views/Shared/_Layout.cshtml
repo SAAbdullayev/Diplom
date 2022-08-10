@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="~/kabinet/assets/css/kabinet.css" rel="stylesheet" />
+    <title>Kabinet</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3">
+                    <div class="header-logo">
+                        <img src="~/images/extra-images/logo_2.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-12">
+                    <div class="header-menu">
+                        <div class="language">
+                            <a data-lang="az" style="cursor:pointer;">Az</a>
+                            <a data-lang="en" style="cursor:pointer;">En</a>
+                            <a data-lang="ru" style="cursor:pointer;">Ru</a>
+                        </div>
+
+                        <div class="mobile-container">
+                            <div class="topnav">
+                                <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                                    <i class="fa fa-bars"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="logout">
+                            <a asp-controller="account" asp-action="signout"><i class="fa-solid fa-arrow-right-from-bracket"></i>@Sidebar.Logout</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="mainsection">
+
+            <div class="row">
+                <div class="col-lg-2 col-md-3">
+
+                    <div id="myLinks">
+                        <div class="row">
+                            <div class="col-sm-12"><a asp-controller="kabinet" asp-action="index">@Sidebar.Xeberler</a></div>
+                            <div class="col-sm-12"><a asp-controller="kabinet" asp-action="derscedveli">@Sidebar.Ders_cedveli</a></div>
+                            @if (User.IsInRole("Telebe"))
+                            {
+                                <div class="col-sm-12"><a asp-controller="imtahan" asp-action="index">@Sidebar.Imtahan_cedveli</a></div>
+                            }
+                            <div class="col-sm-12"><a asp-controller="jurnal" asp-action="index">@Sidebar.Elektron_Jurnal</a></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="navmenu">
+                        <ul>
+                            <li><a asp-controller="kabinet" asp-action="index">@Sidebar.Xeberler</a></li>
+                            <li><a asp-controller="kabinet" asp-action="derscedveli">@Sidebar.Ders_cedveli</a></li>
+                            @if (User.IsInRole("Telebe"))
+                            {
+                                <li><a asp-controller="imtahan" asp-action="index">@Sidebar.Imtahan_cedveli</a></li>
+                            }
+                            <li><a asp-controller="jurnal" asp-action="index">@Sidebar.Elektron_Jurnal</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-9 col-sm-12">
+                    @RenderBody()
+                </div>
+                <div class="col-lg-2 col-md-12 col-sm-12">
+                    <div class="aboutusers">
+                        <div class="userphoto">
+                            <img src="~/photouploads/images/@ViewBag.User.ProfileImg" alt="">
+                        </div>
+                        <div class="user">
+                            @if (User.IsInRole("Telebe"))
+                            {
+                            <p class="heading">@Sidebar.Telebe</p>
+                                <p class="information">@ViewBag.User.Name @ViewBag.User.Surname</p>
+                            }
+                            else if (User.IsInRole("Muellim"))
+                            {
+                                <p class="heading">@Sidebar.Muellim</p>
+                                <p class="information">@ViewBag.User.Name @ViewBag.User.Surname</p>
+                            }
+                        </div>
+                        <div class="user">
+                            @if (User.IsInRole("Telebe"))
+                            {
+                            <p class="heading">@Sidebar.İxtisas</p>
+                                <p class="information">@ViewBag.Ixtisas.Name</p>
+                            }
+                            else if (User.IsInRole("Muellim"))
+                            {
+                                <p class="heading">@Sidebar.Fenn</p>
+                                <p class="information">@ViewBag.Fenn.Name</p>
+                            }
+                        </div>
+                        @if (User.IsInRole("Telebe"))
+                        {
+                            <div class="user">
+                                <p class="heading">@Sidebar.Qrup</p>
+                                <p class="information">@ViewBag.Groups.Name</p>
+                            </div>
+                        }
+                        <div class="user">
+                            <p class="heading">@Sidebar.Qebul_ili</p>
+                            <p class="information">2022</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="~/kabinet/assets/js/kabinet.js"></script>
+
+
+    <script>
+         $(document).ready(function () {
+            const lang = `@Context.GetCurrentCulture()`;
+
+            const selectedLang = $(`[data-lang = "${lang}"]`).text()
+
+            $(`[data-lang-viewer="language"]`).text(selectedLang)
+
+            $('[data-lang]').click(function (e) {
+                e.preventDefault();
+
+                var path = `${window.location.pathname}${window.location.search}`;
+
+                var selectedLang = $(e.currentTarget).data('lang');
+
+                var result = /\/(en|az|ru)?\/?(.*)?/.exec(path);
+
+                if (result != null && result[2] != undefined) {
+                    path = `/${selectedLang}/${result[2]}`;
+                }
+                else if (result != null) {
+                    path = `/${selectedLang}`;
+                }
+
+                window.location.href = path;
+
+            })
+
+        })
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@model Exams
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h1>Details</h1>
+
+<div>
+    <h4>Imtahan</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Qrup
+        </dt>
+        <dd class="col-sm-10">
+
+            @ViewBag.Gruplar.Name
+        </dd>
+        <dt class="col-sm-2">
+            Fenn
+        </dt>
+        <dd class="col-sm-10">
+
+            @ViewBag.Fenn.Name
+        </dd>
+        <dt class="col-sm-2">
+            Bashlama Vaxti
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BashlamaVaxti.ToString("MMM d, yyyy")
+            @Model.BashlamaVaxti.ToString("HH:mm")
+        </dd>
+        <dt class="col-sm-2">
+            Bitme Vaxti
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BitmeVaxti.ToString("MMM d, yyyy")
+            @Model.BashlamaVaxti.ToString("HH:mm")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="editbtn">Edit</a> |
+    <a class="btn btn-grd-inverse" asp-action="Index">Back to List</a>
+</div>

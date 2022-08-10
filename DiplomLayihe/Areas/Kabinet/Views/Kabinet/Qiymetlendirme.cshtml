@@ -1,0 +1,90 @@
+﻿<div class="content">
+    <table class="table table-hover cedvel">
+        <thead>
+            <tr>
+                <th scope="col">Telebe</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">Qiymet</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Students)
+            {
+                <tr>
+                    <td>@item.Name @item.Surname</td>
+                    <td class="studentId"><input style="display: none;" value="@item.Id" /></td>
+                    <td class="lessonId"><input style="display: none;" value="@ViewBag.Lessons.Id" /></td>
+                    <td class="muellimId"><input style="display: none;" value="@ViewBag.User.Id" /></td>
+                    <td>
+                        <select name="qiymet" id="qiymet">
+                            @foreach (var qiymet in ViewBag.Qiymet)
+                            {
+                                if (qiymet.TelebeId == item.Id && qiymet.LessonId == ViewBag.Lessons.Id && qiymet.TeacherId == ViewBag.User.Id && qiymet.Qiymet != 0 && qiymet.Qiymet != 11)
+                                {
+                                    <option value="@qiymet.Qiymet">@qiymet.Qiymet</option>
+                                }
+                                else if (qiymet.TelebeId == item.Id && qiymet.LessonId == ViewBag.Lessons.Id && qiymet.TeacherId == ViewBag.User.Id && qiymet.Qiymet != 0 && qiymet.Qiymet == 11)
+                                {
+                                    <option>q/b</option>
+                                }
+                            }
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">q/b</option>
+                        </select>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function () {
+        $("select").change(function () {
+            var selectedMark = $(this).children("option:selected").val();
+            var telebeId = $(this).parent().parent().children(".studentId").children("input").val();
+            var lessonId = $(this).parent().parent().children(".lessonId").children("input").val();
+            var muellimId = $(this).parent().parent().children(".muellimId").children("input").val();
+            console.log(selectedMark)
+            console.log(telebeId)
+            console.log(lessonId)
+            console.log(muellimId)
+
+
+            $.ajax({
+                url: "/kabinet/kabinet/qiymetlendirme",
+                data: {
+                    selectedMark: selectedMark,
+                    telebeId: telebeId,
+                    lessonId: lessonId,
+                    muellimId: muellimId
+                },
+
+
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    if (data.status == 200) {
+                        location.reload(true)
+                    }
+                }
+
+            })
+        });
+    });
+</script>

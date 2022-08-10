@@ -1,0 +1,66 @@
+﻿@model GrupCreateCommand
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@section css {
+    <style>
+        .ck-content {
+            min-height: 250px;
+        }
+
+        .ixtisas{
+            background-color: transparent;
+            color: white;
+            border-radius: 4px;
+            min-height: 38px;
+        }
+
+        .ixtisas > option{
+            background-color: white;
+            color: black;
+        }
+    </style>
+}
+
+<h1>Create</h1>
+
+<h4>Yeni Qrup</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group" style="display:flex; flex-direction:column;">
+                <label name="IxtisasName" class="control-label">Ixtisas</label>
+                <select class="control-label ixtisas" name="IxtisasName" asp-for="IxtisasName">
+                    <option disabled >Ixtisas Secimi</option>
+                    
+                    @foreach (var item in ViewBag.Ixtisas)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+            </div>
+
+            
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

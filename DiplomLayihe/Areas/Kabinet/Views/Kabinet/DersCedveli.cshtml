@@ -1,0 +1,908 @@
+﻿@{ 
+    DateTime timeNow = DateTime.UtcNow.AddHours(4);
+
+
+}
+
+<div class="content">
+    <table class="table table-hover cedvel">
+        <thead>
+            <tr>
+                <th scope="col">Monday</th>
+                <th scope="col">Tuseday</th>
+                <th scope="col">Wednesday</th>
+                <th scope="col">Thursday</th>
+                <th scope="col">Friday</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ViewBag.Lessons)
+            {
+
+                @if (5 <= Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) && Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) <= 7)
+                {
+                    <tr>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Monday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Tuesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Wednesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Thursday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Friday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+
+                    </tr>
+                }
+
+            }
+
+            @foreach (var item in ViewBag.Lessons)
+            {
+                @if (8 <= Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) && Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) <= 9)
+                {
+                    <tr>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Monday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Tuesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Wednesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Thursday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Friday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+
+                    </tr>
+                }
+
+            }
+
+            @foreach (var item in ViewBag.Lessons)
+            {
+                @if (10 <= Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) && Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) <= 11)
+                {
+                    <tr>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Monday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Tuesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Wednesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Thursday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Friday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+
+                    </tr>
+                }
+
+            }
+
+            @foreach (var item in ViewBag.Lessons)
+            {
+                @if (12 <= Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) && Convert.ToInt32(item.BashlamaVaxti.ToString("HH")) <= 13)
+                {
+                    <tr>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Monday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Tuesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Wednesday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Thursday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        </td>
+                        <td>
+                            @if (item.BashlamaVaxti.DayOfWeek.ToString() == "Friday")
+                            {
+                                <p>Bashlayir: @item.BashlamaVaxti.ToString("HH:mm")</p>
+                                <p>Bitir: @item.BitmeVaxti.ToString("HH:mm")</p>
+                                if (User.IsInRole("Muellim"))
+                                {
+
+                                    @foreach (var qrup in ViewBag.Groups)
+                                    {
+                                        if (qrup.Id == item.GroupId)
+                                        {
+                                            <p> Qrup: @qrup.Name</p>
+                                        }
+                                    }
+
+                                    if (item.BashlamaVaxti < timeNow && timeNow < item.BitmeVaxti && User.IsInRole("Muellim"))
+                                    {
+                                        <a class="btn btn-success" asp-route-id="@item.Id" asp-action="qiymetlendirme">Daxil ol</a>
+                                    }
+                                }
+                                else if (User.IsInRole("Telebe"))
+                                {
+                                    @foreach (var fenn in ViewBag.Fenn)
+                                    {
+                                        if (fenn.Id == item.FennId)
+                                        {
+                                            <p>Fenn:@fenn.Name</p>
+
+                                            @foreach (var muellim in ViewBag.Users)
+                                            {
+                                                if (muellim.TedrisFenniId == fenn.Id)
+                                                {
+                                                    <p>Muellim:@muellim.Name @muellim.Surname</p>
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                            }
+                        </td>
+
+                    </tr>
+                }
+
+
+            }
+
+
+        </tbody>
+    </table>
+</div>

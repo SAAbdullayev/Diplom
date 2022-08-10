@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Lessons>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Lessons</h1>
+<p>
+    <a class="createbtn" asp-action="Create" style="color: white;">
+        Create
+    </a>
+</p>
+
+@section css {
+    <style>
+        .image {
+            width: 120px;
+            height: auto;
+        }
+    </style>
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Qrup Ismi</th>
+                        <th scope="col">Fenn Ismi</th>
+                        <th scope="col">Muellim Ismi</th>
+                        <th scope="col">Bashlama Vaxti</th>
+                        <th scope="col">Bitme Vaxti</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr data-entity-id="@item.Id">
+                        <td>
+                            @foreach (var qrup in ViewBag.Gruplar)
+                            {
+                                if (qrup.Id == item.GroupId)
+                                {
+                                    @qrup.Name
+                                }
+                            }
+                        </td>
+                        <td>
+                            @foreach (var fenn in ViewBag.Fenn)
+                            {
+                                if (fenn.Id == item.FennId)
+                                {
+                                    @fenn.Name
+                                }
+                            }
+                        </td>
+                        <td>
+                            @foreach (var muellim in ViewBag.Muellimler)
+                            {
+                                @foreach (var fenn in ViewBag.Fenn)
+                                {
+                                    if (fenn.Id == item.FennId)
+                                    {
+                                        if (fenn.Id == muellim.TedrisFenniId)
+                                        {
+                                            <p> @muellim.Name @muellim.Surname</p>
+                                        }
+                                    }
+
+                                }
+                            }
+                        </td>
+                        <td>
+                            <p>Tarix: @item.BashlamaVaxti.ToString("MMM d, yyyy")</p>
+                            <p>Saat: @item.BashlamaVaxti.ToString("HH : mm")</p>
+                        </td>
+                        <td>
+                            <p>Tarix: @item.BitmeVaxti.ToString("MMM d, yyyy")</p>
+                            <p>Saat: @item.BitmeVaxti.ToString("HH : mm")</p>
+                        </td>
+                        <td class="atributlar">
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="editbtn">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id" class="detailbtn">Details</a> |
+                            <a onclick="removeEntity(event, @item.Id, '@item.FennId')" class="deletebtn">Delete</a>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

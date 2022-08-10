@@ -1,0 +1,44 @@
+﻿@model IEnumerable<LastNewsandEvents>
+
+@foreach (var item in Model)
+{
+    <div class="content">
+        <div class="newscard">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+                    <div class="newsimage">
+                        <img src="~/photouploads/images/@item.EventPhoto" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+                    <div class="newswriting">
+                        <p class="title">@item.Title</p>
+
+                        <p class="mainwriting" style="min-height: 50px !important;">
+                            @item.MainText.HtmlToPlainText().ToEllipse(100)
+                        </p>
+
+                        <div class="aboutauthor">
+                            <p class="author">
+                                <i class="fa-solid fa-user-large"></i>
+                                @foreach (var users in ViewBag.Users)
+                                {
+                                    if (item.CreatedById == users.Id)
+                                    {
+                                        @users.Name
+                                    }
+                                }
+                            </p>
+                            <p class="time">
+                                <i class="fa-solid fa-calendar-days"></i>
+                                @item.CreatedDate.ToString("MMM d, yyyy")
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+

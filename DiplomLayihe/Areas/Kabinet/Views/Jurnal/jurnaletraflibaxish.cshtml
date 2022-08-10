@@ -1,0 +1,68 @@
+﻿<div class="content">
+    <table class="table table-hover cedvel">
+        <thead>
+            <tr>
+                <th scope="col">Qrup</th>
+                <th scope="col">Telebe</th>
+                <th scope="col"></th>
+                <th scope="col">Qiymet</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (User.IsInRole("Telebe"))
+            {
+                <tr>
+                    <td>
+                        @ViewBag.Groups.Name
+                    </td>
+                    <td>
+                        @ViewBag.User.Name
+                    </td>
+                    <td></td>
+                    <td>
+                        @if (ViewBag.Qiymet == null)
+                        {
+                            <p>i/e</p>
+                        }
+                        else
+                        {
+                            @ViewBag.Qiymet.Qiymet
+                        }
+                    </td>
+                </tr>
+            }
+            else if (User.IsInRole("Muellim"))
+            {
+
+                @foreach (var item in ViewBag.Students)
+                {
+                    <tr>
+                        <td>@ViewBag.Groups.Name</td>
+                        <td>@item.Name @item.Surname</td>
+                        <td></td>
+
+                        @foreach (var qiymet in ViewBag.Qiymet)
+                        {
+                            if (qiymet.TelebeId == item.Id)
+                            {
+                                @if (qiymet.Qiymet != 0 && qiymet.Qiymet != 11)
+                                {
+                                    <td>@qiymet.Qiymet</td>
+                                }
+                                else if (qiymet.Qiymet == 11)
+                                {
+                                    <td>q/b</td>
+                                }
+                                else if (qiymet.Qiymet == 11)
+                                {
+                                    <td>q/b</td>
+                                }
+                            }
+                        }
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+</div>

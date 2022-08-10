@@ -1,0 +1,143 @@
+﻿@model IEnumerable<DiplomUser>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Telebeler</h1>
+
+
+<div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-10">
+        <p>
+            <a class="createbtn" asp-action="registerforstudent" style="color: white;">
+                New Student
+            </a>
+        </p>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2">
+        <select id="fitler" style="color: white;">
+            <option disabled selected>Filter</option>
+            @foreach (var item in ViewBag.Groups)
+            {
+                <option>@item.Name</option>
+            }
+        </select>
+    </div>
+</div>
+
+@section css {
+    <style>
+        .image {
+            width: 120px;
+            height: auto;
+        }
+
+        select {
+            min-width: 140px;
+            min-height: 20px;
+            border: none;
+            background-color: transparent;
+        }
+
+
+
+            select > option {
+                background-color: white;
+                color: black;
+            }
+    </style>
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Number</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Group Name</th>
+                        <th scope="col">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if (item.ProfileImg != null)
+                                {
+                                    <img class="image" src="~/photouploads/images/@item.ProfileImg" />
+                                }
+                            </td>
+                            <td>
+                                @item.UserName.HtmlToPlainText().ToEllipse(8)
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                @item.Surname.HtmlToPlainText().ToEllipse(8)
+                            </td>
+                            <td>
+                                @item.PhoneNumber
+                            </td>
+                            <td>
+                                @item.Email.HtmlToPlainText().ToEllipse(8)
+                            </td>
+                            <td>
+                                @foreach (var qrup in ViewBag.Groups)
+                                {
+                                    if (qrup.Id == item.GrupId)
+                                    {
+                                        @qrup.Name
+                                    }
+                                }
+
+                            </td>
+                            <td class="atributlar">
+                                <a asp-action="Details" asp-route-id="@item.Id" class="detailbtn">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+@*<script>
+    $(document).ready(function () {
+        $("#fitler").change(function () {
+            var groupName = $(this).children("option:selected").val();
+            console.log(groupName)
+
+
+            $.ajax({
+                url: "/kabinet/kabinet/index",
+                data: {
+                    groupName: groupName
+                },
+
+
+                dataType: "json",
+                type: "post",
+                success: function (data) {
+                    if (data.status == 200) {
+                        location.reload(true)
+                    }
+                }
+
+            })
+        });
+    });
+</script>*@
+

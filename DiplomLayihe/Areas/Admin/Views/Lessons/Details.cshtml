@@ -1,0 +1,71 @@
+﻿@model Lessons
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+
+<h1>Details</h1>
+
+<div>
+    <h4>Dersler</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Qrup
+        </dt>
+        <dd class="col-sm-10">
+
+            @foreach (var item in @ViewBag.Gruplar)
+            {
+                if (item.Id == Model.GroupId)
+                {
+                    @item.Name
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Fenn
+        </dt>
+        <dd class="col-sm-10">
+
+            @foreach (var item in @ViewBag.Fenn)
+            {
+                if (item.Id == Model.FennId)
+                {
+                    @item.Name
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Tedris eden muellim
+        </dt>
+        <dd class="col-sm-10">
+
+            @foreach (var item in @ViewBag.Muellimler)
+            {
+                if (item.Id == Model.MuellimId)
+                {
+                    @item.Name
+                }
+            }
+        </dd>
+        <dt class="col-sm-2">
+            Bashlama Vaxti
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BashlamaVaxti.ToString("MMM d, yyyy")
+        </dd>
+        <dt class="col-sm-2">
+            Bitme Vaxti
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BitmeVaxti.ToString("MMM d, yyyy")
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="editbtn">Edit</a> |
+    <a class="btn btn-grd-inverse" asp-action="Index">Back to List</a>
+</div>

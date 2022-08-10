@@ -1,0 +1,115 @@
+﻿@model LessonsCreateCommand
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@section css {
+    <style>
+        .ck-content {
+            min-height: 250px;
+        }
+
+        .ixtisas {
+            background-color: transparent;
+            color: white;
+            border-radius: 4px;
+            min-height: 38px;
+        }
+
+            .ixtisas > option {
+                background-color: white;
+                color: black;
+            }
+    </style>
+}
+
+<h1>Create</h1>
+
+<h4>Yeni Ders</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group" style="display:flex; flex-direction:column;">
+                <label name="FennName" class="control-label">Fenn Secin</label>
+                <select class="control-label ixtisas" name="FennName" asp-for="FennName">
+                    <option disabled>Fenn Secimi</option>
+
+                    @foreach (var item in ViewBag.Fenn)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group" style="display:flex; flex-direction:column;">
+                <label name="GroupName" class="control-label">Qrup Secin</label>
+                <select class="control-label ixtisas" name="GroupName" asp-for="GroupName">
+                    <option disabled>Qrup Secimi</option>
+
+                    @foreach (var item in ViewBag.Gruplar)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+            </div>
+
+
+
+            <div class="form-group" style="display:flex; flex-direction:column;">
+                <label name="TeacherName" class="control-label">Muellim Secin</label>
+                <select class="control-label ixtisas" name="TeacherName" asp-for="TeacherName">
+                    <option disabled>Muellim Secin</option>
+
+                    @*@foreach (var item in ViewBag.Muellimler)
+        {
+            <option>@item.Name</option>
+        }*@
+
+                    @foreach (var item in ViewBag.Muellimler)
+                    {
+                        foreach (var fenn in ViewBag.Fenn)
+                        {
+                            
+                                if (fenn.Id == item.TedrisFenniId)
+                                {
+
+                                    <option>@item.Name @item.Surname - @fenn.Name</option>
+                                }
+                            
+                        }
+                    }
+                </select>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="BashlamaVaxti" class="control-label"></label>
+                <input asp-for="BashlamaVaxti" class="form-control" />
+                <span asp-validation-for="BashlamaVaxti" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="BitmeVaxti" class="control-label"></label>
+                <input asp-for="BitmeVaxti" class="form-control" />
+                <span asp-validation-for="BitmeVaxti" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
